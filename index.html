@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0f6b45">
+<meta name="description" content="NOVA Smart Local: reliable local commerce with pre-booking, backup stores and community-assisted ordering.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect width='10' height='10' rx='2' fill='%230f6b45'/%3E%3C/svg%3E">
+<title>NOVA Smart Local — Business Rescue Prototype</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<a class="sr skip" href="#customer">Skip to main content</a>
+<header class="top">
+  <div class="brand"><span class="logo">N</span><div><b>NOVA SMART LOCAL</b><small>Local commerce reliability layer</small></div></div>
+  <div class="top-actions"><button id="help" class="ghost">Help</button><button id="role" class="role" aria-label="Switch role view">Customer ▾</button></div>
+</header>
+
+<main id="content">
+<noscript><p>NOVA Smart Local needs JavaScript enabled to run this demo.</p></noscript>
+<section class="hero">
+  <div>
+    <span class="eyebrow">PROMPT • DISCOVER • BUILD • PROVE</span>
+    <h1>Book what is actually available.</h1>
+    <p>NOVA Smart Local connects customers, community stores and partner stores so availability, fulfillment and local delivery are handled as one flow.</p>
+    <div class="hero-actions">
+      <button class="primary" data-scroll="customer">Start order</button>
+      <button class="light" data-scroll="community">Community Store mode</button>
+    </div>
+  </div>
+  <div class="hero-card"><span>Prototype KPI</span><b id="kpi">0</b><small>demo events processed</small></div>
+</section>
+
+<div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+<section id="customer" class="section">
+  <div class="section-head"><div><span class="eyebrow dark">1. INPUT</span><h2>Customer order</h2></div><span class="badge green">Simple village mode</span></div>
+  <div class="search">
+    <label for="q" class="sr">Search product</label>
+    <input id="q" placeholder="Search rice, milk, honey..." autocomplete="off">
+    <button id="search" class="primary">Search</button>
+  </div>
+  <div class="quick">
+    <button data-open="assist"><span>🏪</span><b>Ask Community Store</b><small>Operator orders for customer</small></button>
+    <button data-open="trust"><span>🛡️</span><b>Check Product Trust</b><small>Source, batch & expiry</small></button>
+    <button data-open="reward"><span>🎁</span><b>Experience Rewards</b><small>Clear reward instead of confusing coupon</small></button>
+  </div>
+  <div id="products" class="products" aria-live="polite"></div>
+</section>
+
+<section id="evidence" class="section" aria-labelledby="evidenceTitle">
+  <div class="section-head"><div><span class="eyebrow dark">PROBLEM → FEATURE</span><h2 id="evidenceTitle">Case evidence we solve</h2></div></div>
+  <div class="metrics">
+    <div><span>Shown available, then unavailable</span><b>29%</b><small>→ Pre-book + stock lock</small></div>
+    <div><span>Cancellations: product unavailable</span><b>35%</b><small>→ Backup partner store</small></div>
+    <div><span>Cancellations: store rejected</span><b>18%</b><small>→ Demand prep + shift planning</small></div>
+    <div><span>Deliveries over 15 min late</span><b>13%</b><small>→ Local checkpoints</small></div>
+  </div>
+</section>
+
+<section id="flow" class="section">
+  <div class="section-head"><div><span class="eyebrow dark">2. PROCESSING / LOGIC</span><h2>Smart fulfillment engine</h2></div></div>
+  <div class="flow-grid">
+    <article class="flow-card"><b>Availability</b><span>Check live demo inventory + confidence</span></article>
+    <article class="flow-card"><b>Reserve</b><span>Lock stock before dispatch</span></article>
+    <article class="flow-card"><b>Backup</b><span>If unavailable, search nearby partner store</span></article>
+    <article class="flow-card"><b>Demand</b><span>Use pre-book signals to prepare stock</span></article>
+  </div>
+</section>
+
+<section id="order" class="section">
+  <div class="section-head"><div><span class="eyebrow dark">3. ACTION / RECOMMENDATION</span><h2>Order control</h2></div><span id="orderStatus" class="badge blue">No active order</span></div>
+  <div class="dashboard">
+    <article class="card">
+      <div class="card-head"><h3>Order #NSL-1042</h3><span class="badge green">Protected flow</span></div>
+      <div id="timeline" class="timeline"></div>
+      <div class="actions">
+        <button class="secondary" data-open="replacement">🔄 Replacement</button>
+        <button class="secondary" data-open="alternative">↔ Alternative item</button>
+        <button class="secondary" data-open="refund">Refund</button>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-head"><h3>Local tracking</h3><span class="badge blue">Checkpoint based</span></div>
+      <p class="muted">Tracking updates when a responsible local role records a handover.</p>
+      <div class="checkpoints">
+        <button class="checkpoint done" data-check="Packed" aria-pressed="true">1<br><small>Store packed</small></button>
+        <button class="checkpoint done" data-check="Handover" aria-pressed="true">2<br><small>Community handover</small></button>
+        <button class="checkpoint current" data-check="Delivery" aria-pressed="false">3<br><small>Delivery partner</small></button>
+        <button class="checkpoint" data-check="Received" aria-pressed="false">4<br><small>Customer received</small></button>
+      </div>
+      <button id="showMap" class="secondary full" aria-expanded="false" aria-controls="mapBox">Show map here</button>
+      <button id="maps" class="secondary full mt">Open nearby store in Google Maps</button>
+      <button id="calendar" class="secondary full mt">Add delivery reminder to Google Calendar</button>
+      <div id="mapBox"></div>
+    </article>
+  </div>
+</section>
+
+<section id="community" class="section">
+  <div class="section-head"><div><span class="eyebrow dark">COMMUNITY STORE</span><h2>Assisted local commerce</h2></div><span class="badge orange">Low digital dependency</span></div>
+  <div class="dashboard">
+    <article class="card">
+      <h3>For customers who need help</h3>
+      <p>Community operators can create orders, confirm substitutions, call customers through a protected workflow and update local checkpoints.</p>
+      <button class="primary full" data-open="assist">Create assisted booking</button>
+      <button class="secondary full mt" data-open="call">Contact customer</button>
+    </article>
+    <article class="card">
+      <h3>Village operations</h3>
+      <div class="statrow"><span>Orders assisted</span><b>28</b></div>
+      <div class="statrow"><span>Fulfilled</span><b>24</b></div>
+      <div class="statrow"><span>Awaiting confirmation</span><b>4</b></div>
+    </article>
+  </div>
+</section>
+
+<section id="store" class="section">
+  <div class="section-head"><div><span class="eyebrow dark">PARTNER STORE</span><h2>Inventory + demand control</h2></div><span class="badge green">Real-time demo sync</span></div>
+  <div class="dashboard">
+    <article class="card">
+      <div class="card-head"><h3>Stock</h3><span id="sync" class="badge green">SYNC ON</span></div>
+      <div class="stock"><span><b>Rice 5kg</b><small id="rice">12 available</small></span><button id="sell" class="primary mini">Sell 1</button></div>
+      <div class="stock"><span><b>Milk 1L</b><small id="milk">4 available</small></span><span class="badge orange">Low</span></div>
+      <div class="stock"><span><b>Local Honey</b><small>0 available</small></span><span class="badge red">Unavailable</span></div>
+    </article>
+    <article class="card">
+      <h3>Demand recommendation</h3>
+      <p class="muted">Based on pre-book activity in this demo.</p>
+      <div class="recommend"><b>Rice</b><span>Prepare +6</span></div>
+      <div class="recommend"><b>Milk</b><span>Prepare +8</span></div>
+      <div class="recommend"><b>Snacks</b><span>Prepare +4</span></div>
+      <button class="secondary full" id="prepare">Create stock preparation plan</button>
+    </article>
+  </div>
+  <article class="card mt">
+    <div class="card-head"><h3>Busy-period staffing</h3><span class="badge blue">Store workflow</span></div>
+    <div class="statrow"><span>5–8 PM</span><b>4 workers recommended</b></div>
+    <p class="muted">The aim is to reduce store rejection during peak periods without adding a large permanent workforce.</p>
+  </article>
+</section>
+
+<section id="control" class="section">
+  <div class="section-head"><div><span class="eyebrow dark">4. OUTPUT</span><h2>HQ Control Center</h2></div><span class="badge blue">One source of truth</span></div>
+  <div class="metrics">
+    <div><span>Repeat purchase</span><b>27%</b><small>case baseline</small></div>
+    <div><span>Delivery time</span><b>37 min</b><small>case baseline</small></div>
+    <div><span>Cancellation</span><b>11%</b><small>case baseline</small></div>
+    <div><span>Support tickets</span><b>5,900</b><small>per month baseline</small></div>
+  </div>
+  <article class="card mt">
+    <h3>Business impact logic</h3>
+    <div class="impact"><span>Accurate availability</span><b>↓ avoidable cancellations</b></div>
+    <div class="impact"><span>Backup local fulfillment</span><b>↑ fulfillment rate</b></div>
+    <div class="impact"><span>Clear replacement flow</span><b>↓ refund/support load</b></div>
+    <div class="impact"><span>Pre-book demand signals</span><b>↑ store readiness</b></div>
+    <div class="impact"><span>Local-store differentiation</span><b>↑ reason to choose NOVA</b></div>
+  </article>
+</section>
+</main>
+
+<footer>NOVA SMART LOCAL • Functional challenge prototype • Uses Google Maps &amp; Google Calendar links • Demo data is clearly marked</footer>
+
+<dialog id="modal" aria-labelledby="modalTitle">
+  <div class="modal-head"><h2 id="modalTitle">NOVA</h2><button id="close" class="icon" aria-label="Close dialog">×</button></div>
+  <div id="modalBody"></div>
+</dialog>
+<script src="app.js" defer></script>
+</body>
+</html>

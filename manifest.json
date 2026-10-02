@@ -1,0 +1,10 @@
+{
+  "name": "NOVA Smart Local",
+  "lang": "en",
+  "short_name": "NOVA Local",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f8f6",
+  "theme_color": "#0f6b45",
+  "description": "Prototype for reliable local commerce, store availability and community-assisted ordering."
+}

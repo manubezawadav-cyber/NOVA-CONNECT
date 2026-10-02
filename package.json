@@ -1,0 +1,7 @@
+{
+  "name": "nova-smart-local",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NOVA Smart Local prototype (no dependencies)",
+  "scripts": { "test": "node tests.js" }
+}
